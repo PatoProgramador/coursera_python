@@ -209,8 +209,14 @@ def decidir_invitar(peli: dict, edad_invitado: int, autorizacion_padres: bool)->
     Retorna:
         bool: True en caso de que se pueda invitar a la persona, False de lo contrario.
     """
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
-    return False
+    # Formateo de la edad permitida
+    edadPermitida = peli["clasificacion"].replace("+","")
+    edadPermitida = int(edadPermitida)
+    if edad_invitado < edadPermitida :
+        return False
+    if not autorizacion_padres:
+        return False
+    return True
 
 
 
