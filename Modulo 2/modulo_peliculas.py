@@ -115,7 +115,7 @@ def duracion_promedio_peliculas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict
     horas = int(promedio / 60)
     minutos = int(promedio % 60)
     message = f'{horas:02}:{minutos:02}'
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
+
     return message
 
 def encontrar_estrenos(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict, anio: int) -> str:
@@ -143,7 +143,7 @@ def encontrar_estrenos(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict, anio: i
                 message = message + ", " + pelis[i]["nombre"]
     if message == "":
         message = "Niguna"
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
+
     return message
 
 def cuantas_peliculas_18_mas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> int:
@@ -162,7 +162,7 @@ def cuantas_peliculas_18_mas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -
     for i in range(0, len(pelis)) :
         if pelis[i]["clasificacion"] == "18+" :
             acum = acum + 1
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
+
     return acum
 
 def reagendar_pelicula(peli:dict, nueva_hora: int, nuevo_dia: str, 
