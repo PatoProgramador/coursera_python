@@ -61,7 +61,8 @@ def ejecutar_encontrar_pelicula_mas_larga(p1: dict, p2: dict, p3: dict, p4: dict
         p4 (dict): Diccionario que contiene la informacion de la pelicula 4.
         p5 (dict): Diccionario que contiene la informacion de la pelicula 5.
     """
-   # TODO: Completar
+    peli = mod.encontrar_pelicula_mas_larga(p1,p2,p3,p4,p5)
+    print(f'La pelicula con mayor duración es {peli["nombre"]} con una duración de: {peli["duracion"]} mins')
    
 
 def ejecutar_consultar_duracion_promedio_peliculas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict)->None:
@@ -73,7 +74,8 @@ def ejecutar_consultar_duracion_promedio_peliculas(p1: dict, p2: dict, p3: dict,
         p4 (dict): Diccionario que contiene la informacion de la pelicula 4.
         p5 (dict): Diccionario que contiene la informacion de la pelicula 5.
     """
-   # TODO: Completar
+    result = mod.duracion_promedio_peliculas(p1,p2,p3,p4,p5)
+    print(f'La duración promedio de las peliculas es {result}')
 
 def ejecutar_encontrar_estrenos(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict)->None:
     """ Ejecuta la opcion de buscar peliculas de estreno. Esto es: las peliculas que sean 
@@ -85,7 +87,9 @@ def ejecutar_encontrar_estrenos(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict
         p4 (dict): Diccionario que contiene la informacion de la pelicula 4.
         p5 (dict): Diccionario que contiene la informacion de la pelicula 5.
     """
-   # TODO: Completar
+    anio = int(input('Ingrese el año de consulta para las peliculas en estreno: '))
+    result = mod.encontrar_estrenos(p1,p2,p3,p4,p5, anio)
+    print(f'Las peliculas en estreno son: {result}.')
 
 def ejecutar_cuantas_peliculas_18_mas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict)->None:
     """Ejecuta la opcion de consultar cuantas peliculas de la agenda tienen clasificacion
@@ -97,7 +101,9 @@ def ejecutar_cuantas_peliculas_18_mas(p1: dict, p2: dict, p3: dict, p4: dict, p5
         p4 (dict): Diccionario que contiene la informacion de la pelicula 4.
         p5 (dict): Diccionario que contiene la informacion de la pelicula 5.
     """
-   # TODO: Completar
+    acum = mod.cuantas_peliculas_18_mas(p1,p2,p3,p4,p5)
+    print(f'La cantidad de pelicula con clasificación 18+ son {acum}.')
+    
     
 def ejecutar_reagendar_pelicula(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict)->None:
     """Ejecuta la opcion de reagendar una pelicula
@@ -115,7 +121,21 @@ def ejecutar_reagendar_pelicula(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict
     
     if pelicula is None:
         print("No hay ninguna pelicula con este nombre")
-    # TODO: Completar
+    else :
+        hora = int(input('Ingrese la nueva hora en la que desea reagendar la pelicula, ingresela en formate de enteros(por ej, para las 14:15 es 1415): '))
+        dia = input('Ingrese el día en el que desea reagendar la pelicula: ')
+        control_horario = False
+        control = input('¿Desea solicitar el control de horario? (S) para sí, (N) para no: ')
+        control.upper()
+        if control == "S":
+            control_horario = True
+    
+        result = mod.reagendar_pelicula(pelicula, hora, dia, control_horario, p1, p2 ,p3, p4, p5)
+
+        if result:
+            print(f'La pelicula {pelicula["nombre"]} se ha reasignado con exito')
+        else:
+            print(f'No se ha podido reasignar la pelicula {pelicula["nombre"]}, por favor verifica que no exista conflicto en los horarios')
 
 def ejecutar_decidir_invitar(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict)->None:
     """Ejecuta la opcion de decidir si se puede invitar a alguien a ver una pelicula o no.
@@ -133,7 +153,19 @@ def ejecutar_decidir_invitar(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict)->
 
     if pelicula is None:
         print("No hay ninguna pelicula con este nombre")
-   # TODO: Completar
+    else:
+        edad = int(input('Ingrese la edad de su invitad@: '))
+        auto_Bool = False
+        autorizacion = input('¿Su invitad@ cuenta con autorización de los padres? (S) para sí, (N) para no: ')
+        autorizacion.upper()
+        if autorizacion == 'S':
+            auto_Bool = True
+        result = mod.decidir_invitar(pelicula, edad, auto_Bool)
+        if result :
+            print(f'¡Puedes traer a tu invitad@ a ver {pelicula["nombre"]}!')
+        else :
+            print(f'No puedes traer a tu invitad@ a ver {pelicula["nombre"]}. Por favor verifica su cuenta con autorización de sus padres y si alguna pelicula tiene una restricción de edad acorde.')
+
   
 def iniciar_aplicacion():
     """Inicia la ejecución de la aplicación por consola.

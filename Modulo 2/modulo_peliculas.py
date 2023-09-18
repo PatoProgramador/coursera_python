@@ -40,7 +40,6 @@ def crear_pelicula(nombre: str, genero: str, duracion: int, anio: int,
     Retorna:
         dict: Diccionario con los datos de la pelicula
     """    
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
     return {
         "nombre": nombre,
         "genero": genero,
@@ -85,7 +84,6 @@ def encontrar_pelicula_mas_larga(p1: dict, p2: dict, p3: dict, p4: dict, p5: dic
     Retorna:
         dict: El diccionario de la pelicula de mayor duracion
     """
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
     pelis = [p2, p3, p4, p5]
     mayor = p1
     for i in range(0, len(pelis)) :
@@ -185,6 +183,8 @@ def reagendar_pelicula(peli:dict, nueva_hora: int, nuevo_dia: str,
     Retorna:
         bool: True en caso de que se haya podido reagendar la pelicula, False de lo contrario.
     """
+    if peli['dia'] == nuevo_dia and peli['hora'] == nueva_hora:
+        return False
 
     pelis = [p1, p2, p3, p4, p5]
     for pelicula in pelis:
