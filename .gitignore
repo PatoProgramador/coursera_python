@@ -1,0 +1,4 @@
+# cache de ejecución
+__pycache__/
+# manejo de librerias y entorno virtual
+venv/
