@@ -22,7 +22,9 @@ def ejecutar_cargar_canciones() -> list:
     """
     canciones = None
     archivo = input("Por favor ingrese el nombre del archivo CSV con las canciones: ")
+    # Retorna una lista de canciones
     canciones = bb.cargar_canciones(archivo)
+    # Validacion en caso de tener una lista vacia
     if len(canciones) == 0:
         print("El archivo seleccionado no es válido. No se pudieron cargar las canciones del Ranking")
     else:
@@ -35,8 +37,9 @@ def ejecutar_buscar_cancion(canciones:list)->None:
     """
     cancion = input("Por favor ingrese el nombre de la canción que desea buscar: ")
     anio = int(input("Por favor ingrese el año de la canción que desea buscar: "))
-    
+    # Retorna un diccionario
     cancion = bb.buscar_cancion(canciones, cancion, anio)
+    # validacion en caso de que no exista la cancion
     if cancion:
         bb.mostrar_detalles_cancion(cancion, True)
     else :
@@ -46,9 +49,9 @@ def ejecutar_canciones_anio(canciones:list)->None:
     """ Ejecuta la opción de consultar las canciones de un año dado 
     """
     anio = int(input("Por favor ingrese el año que desea consultar: "))
-
+    # Retorna una lista de canciones
     anio_canciones = bb.buscar_canciones_anio(canciones, anio)
-
+    # Validacion en caso de tener una lista vacia
     if len(anio_canciones) > 0:
         for cancion in anio_canciones:
             bb.mostrar_detalles_cancion(cancion, False)
@@ -62,55 +65,86 @@ def ejecutar_canciones_artista_periodo(canciones:list)->None:
     artista = input("Por favor ingrese el nombre del artista que desea buscar: ")
     anio_inic = int(input("Por favor ingrese el año inicial que desea buscar: "))
     anio_fin = int(input("Por favor ingrese el año final que desea buscar: "))
-
+    # Retorna una lista de canciones
     artista_canciones = bb.buscar_canciones_artista(canciones, artista, anio_inic, anio_fin)
-    for cancion in artista_canciones:
-        bb.mostrar_detalles_cancion(cancion, False)
+    # Validacion en caso de tener una lista vacia
+    if len(artista_canciones) > 0:
+        for cancion in artista_canciones:
+            bb.mostrar_detalles_cancion(cancion, False)
+    else:
+        print('No se encontraron canciones con los parametros dados, por favor verifica la información.')
 
 def ejecutar_todas_canciones_artista(canciones:list)->None:
     """ Ejecuta la opción de consultar todas las canciones de un artista dado 
     """
     artista = input("Por favor ingrese el nombre del artista que desea buscar: ")
-
-    #TODO: complete el código haciendo el llamado a la función del módulo que
-    #implementa este requrimiento e imprimiendo por pantalla el resultado
+    # Retorna la lista de canciones del artista
+    artista_canciones = bb.buscar_canciones_artista_unico(canciones,artista)
+    # validacion en caso de no encontrar canciones
+    if len(artista_canciones) :
+        for cancion in artista_canciones :
+            bb.mostrar_detalles_cancion(cancion, False)
+    else:
+        print('No se encontraron canciones relacionadas al artista, por favor verifica la información.')
 
 def ejecutar_todos_artistas_cancion(canciones:list)->None:
     """ Ejecuta la opción de consultar todos los artistas que han interpretado 
     una canción dada 
     """
     min = input("Por favor ingrese el nombre de la canción que desea buscar: ")
-
-    #TODO: complete el código haciendo el llamado a la función del módulo que
-    #implementa este requrimiento e imprimiendo por pantalla el resultado
+    # Retorna la lista de strings
+    artistas = bb.buscar_artistas_interpretes(canciones, min)
+    # validacion de que se hayan encontrado o no
+    if len(artistas) > 0:
+        print("-"*80)
+        print(artistas)
+        print("-"*80)
+    else :
+        print('No se encontraron artistas relacionados a la canción, por favor verifica la información.')
 
 def ejecutar_artistas_mas_populares(canciones:list)->None:
     """ Ejecuta la opción de consultar los artistas más populares 
     """
-    min = input("Por favor ingrese la cantidad mínima de canciones que desea buscar: ")
+    min = int(input("Por favor ingrese la cantidad mínima de canciones que desea buscar: "))
+    # diccionario de artistas
+    artistas = bb.buscar_cantidad_canciones(canciones, min)
+    if len(artistas) > 0:
+        print("-"*80)
+        print('Artista-número de canciones')
+        for key, value in artistas.items():
+            print(f'{key}:{value}')
+        print("-"*80)
+    else :
+        print('No se encontraron artistas con la cantidad de canciones dadas en el billboard. por favor intenta con otro valor')
 
-    #TODO: complete el código haciendo el llamado a la función del módulo que
-    #implementa este requrimiento e imprimiendo por pantalla el resultado
-     
 def ejecutar_artista_estrella(canciones:list)->None:
     """ Ejecuta la opción de consultar el artista estrella de todos los tiempos 
     """
-    #TODO: complete el código haciendo el llamado a la función del módulo que
-    #implementa este requrimiento e imprimiendo por pantalla el resultado
+    artista = bb.buscar_artista_estrella(canciones)
+    if artista:
+        # Se saca clave y valor del diccionario para imprimir
+        clave, valor = next(iter(artista.items()))
+        print(f'El artista estrella de todos los tiempos es {clave} con {valor} canciones.')
+    else :
+        print('Ocurrió un error encontrando el artista')
 
 def ejecutar_artistas_y_sus_canciones(canciones:list)->None:
     """ Ejecuta la opción de consultar la lista completa de artistas del Billboard 
     junto con sus canciones 
     """
-    #TODO: complete el código haciendo el llamado a la función del módulo que
-    #implementa este requrimiento e imprimiendo por pantalla el resultado
+    artistas = bb.buscar_artistas_y_canciones(canciones)
+    print("-"*80)
+    print('Artista-canciones')
+    for key, value in artistas.items():
+        print(f'{key}:{value}')
+        print("-"*80)
 
 def ejecutar_promedio_canciones_por_artista(canciones:list)->None:
     """ Ejecuta la opción de consultar la cantidad promedio de canciones que los 
     artistas tienen en el listado de Billboard 
     """
-    #TODO: complete el código haciendo el llamado a la función del módulo que
-    #implementa este requrimiento e imprimiendo por pantalla el resultado
+    promedio = bb.promedio_canciones_por_artista(canciones)
+    print(f'El promedio de canciones por artista es: {promedio}')
     
     
 def mostrar_menu():
